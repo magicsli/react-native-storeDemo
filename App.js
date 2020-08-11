@@ -35,7 +35,7 @@ const App: () => React$Node = () => {
         <View>
           <Text> 
               当前屏幕宽度为: {Dimensions.get('window').width}; {'\n'}
-              当前屏幕高度为: {Dimensions.get('window').height};{'\n'}
+              dw: {Dimensions.get('window').height};{'\n'}
               当前屏幕分辨率为: {Dimensions.get('window').scale};{'\n'}
           </Text>
 
