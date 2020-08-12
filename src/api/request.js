@@ -25,8 +25,8 @@ export function postData(url, data) {
 
 /**
  * 
- * @param {String} url 
- * @param {Object} data 
+ * @param {String} url 路由地址
+ * @param {Object} data 需要传递的参数
  */
 export function getData(url = '', data = {}) {
     url += "?timeing=" + +new Date() + '&';

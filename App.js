@@ -27,20 +27,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Index from '@/page/index'
+
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView  style={styles.mianView}>
-        <View>
-          <Text> 
-              当前屏幕宽度为: {Dimensions.get('window').width}; {'\n'}
-              dw: {Dimensions.get('window').height};{'\n'}
-              当前屏幕分辨率为: {Dimensions.get('window').scale};{'\n'}
-          </Text>
-
-        
-        </View>
+        <Index />
       </SafeAreaView> 
     </>
   );
@@ -52,11 +46,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'red',
-    borderLeftColor: '#ccc',
-    borderLeftWidth: 20,
-    borderStyle: 'dashed',
-    
   }
 })
 
