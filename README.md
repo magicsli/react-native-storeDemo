@@ -1,9 +1,7 @@
 # react-native-storeDemo
-my frist react-native-demo, so not good. forgive me a lot
 这是我的一个用于学习与测试react-native的一个demo库
 
-
-my english not good, so...
+快速开始:
 
 npm install
 
@@ -14,4 +12,4 @@ react-native run-ios
 
 
 
-2020/8/10 init prject 
+2020/8/10 -- init prject 
