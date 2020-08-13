@@ -28,13 +28,14 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Index from '@/page/index'
+import Scorll from '@/page/scorll'
 
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView  style={styles.mianView}>
-        <Index />
+        <Scorll />
       </SafeAreaView> 
     </>
   );
@@ -42,10 +43,7 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   mianView: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
   }
 })
 

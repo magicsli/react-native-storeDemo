@@ -1,13 +1,13 @@
-import { LinkPath } from '@/setting.js'
+import baseSetting from '@/setting.js'
 
 /**
  * 
  * @param {String} url 路由地址
  * @param {Obeject} data 需要传递的参数
  */
-export function postData(url, data) {
+export function postData(url = {}, data = {}) {
     // Default options are marked with *
-    return fetch(LinkPath + url, {
+    return fetch(baseSetting.LinkPath + url, {
         body: JSON.stringify(data), // must match 'Content-Type' header
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, same-origin, *omit
@@ -29,12 +29,13 @@ export function postData(url, data) {
  * @param {Object} data 需要传递的参数
  */
 export function getData(url = '', data = {}) {
-    url += "?timeing=" + +new Date() + '&';
+    url += "?timeing=" + +new Date();
     for (let k in data) {
         url += `&${k}=${data[k]}`
     }
+    console.log(baseSetting.LinkPath + url)
     // Default options are marked with *
-    return fetch(LinkPath + url, {
+    return fetch(baseSetting.LinkPath + url, {
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, same-origin, *omit
         headers: {
