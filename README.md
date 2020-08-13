@@ -1,5 +1,7 @@
 # react-native-storeDemo
 my frist react-native-demo, so not good. forgive me a lot
+这是我的一个用于学习与测试react-native的一个demo库
+
 
 my english not good, so...
 
