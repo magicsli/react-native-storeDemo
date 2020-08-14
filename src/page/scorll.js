@@ -8,13 +8,18 @@ import {
     RefreshControl,
     Image,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    FlatList,
+    TouchableOpacity
 } from 'react-native';
 
 
 import {
     getContact
 } from '@/api/test';
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 export default class scorll extends PureComponent {
     static propTypes = {
@@ -37,6 +42,7 @@ export default class scorll extends PureComponent {
         }
     }
 
+    // 处理列表下拉刷新
     handleRefresh = () => {
         this.setState({
             page: 1,
@@ -50,6 +56,7 @@ export default class scorll extends PureComponent {
 
     }
 
+    // 获取页面数据
     getData = () => {
         this.setState({
             loading: true
@@ -84,19 +91,51 @@ export default class scorll extends PureComponent {
         this.getData();
     }
 
+    _returnItem = ({ item }) => {
+        return (
+            <View style={styles.item} key={item.id}>
+
+                <View style={styles.itemInfo}>
+                    <Text numberOfLines={2} style={styles.title}>{item.main_title}</Text>
+                    <Text style={styles.sendDate}>{item.send_date}</Text>
+                </View>
+                <Image source={{ uri: item.cover_image, }} style={styles.itemImage} />
+            </View>)
+    }
 
     render() {
 
-        const screenWidth = Dimensions.get("window").width;
-        const screenHeight = Dimensions.get("window").height;
-
+        const {
+            dataList
+        } = this.state;
         return (
             <View style={styles.root}>
                 <Image style={styles.top_img} source={{ uri: this.state.top_img, width: screenWidth, height: 160 }} />
                 <View style={styles.main}>
-                    <ScrollView
+
+                    {/* 使用FlatList, 使用起来和Android中的Adapter一样, 可重复渲染, 复用性高, 但是需注意此方法item中不宜保存状态数据,  */}
+                    <FlatList
+                        data={dataList}
+                        refreshing={this.state.loading}
+                        onRefresh={this.handleRefresh}
+                        extraData={this.state.loading}
+                        renderItem={this._returnItem}
+                        ListHeaderComponent={<View style={styles.frist}>
+                            <Text style={styles.title}>{this.state.frist.main_title}</Text>
+                            <Image style={styles.fristImg} source={{
+                                uri: this.state.frist.cover_image,
+                                width: "100%",
+                                height: 266
+                            }} ></Image>
+                            <Text style={styles.sendDate}>{this.state.frist.send_date}</Text>
+
+                        </View>}
+                        keyExtractor={(item) => "" + item.id}
+                    />
+
+                    {/* 使用ScrollView, 性能不足, 但是灵活,适用于多变业务 */}
+                    <ScrollView style={{ display: 'none' }}
                         refreshControl={
-                            /** 设置下拉刷新数据 */
                             <RefreshControl
                                 refreshing={this.state.loading}
                                 onRefresh={this.handleRefresh}
@@ -116,21 +155,22 @@ export default class scorll extends PureComponent {
 
                         {
                             this.state.dataList.map(item => (<View style={styles.item} key={item.id}>
-                               
-                               <View style={styles.itemInfo}>
-                                 <Text numberOfLines={2} style={styles.title}>{item.main_title}</Text>
-                                 <Text style={styles.sendDate}>{item.send_date}</Text>
-                               </View>
-                                <Image  source={{ 
+
+                                <View style={styles.itemInfo}>
+                                    <Text numberOfLines={2} style={styles.title}>{item.main_title}</Text>
+                                    <Text style={styles.sendDate}>{item.send_date}</Text>
+                                </View>
+                                <Image source={{
                                     uri: item.cover_image,
-                                    
+
                                 }}
-                                style={styles.itemImage}
-                                    />
-                                
+                                    style={styles.itemImage}
+                                />
+
                             </View>))
                         }
                     </ScrollView>
+
                 </View>
 
             </View>
@@ -138,6 +178,8 @@ export default class scorll extends PureComponent {
         )
     }
 }
+
+/* */
 
 const styles = StyleSheet.create({
     main: {
@@ -157,7 +199,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        
+
     },
     fristImg: {
         borderRadius: 6,
@@ -165,22 +207,24 @@ const styles = StyleSheet.create({
         marginBottom: 11,
     },
     sendDate: {
-        color:"#999"
+        color: "#999"
     },
 
     item: {
-        display:'flex',
-        justifyContent:'space-between',
-        flexDirection:'row',
+        // width: screenWidth,
+        // height: 60,
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
         paddingVertical: 20
     },
     itemInfo: {
         flex: 1,
         marginRight: 30,
-        justifyContent:"space-between",
-        
+        justifyContent: "space-between",
+
     },
-    itemImage:{ 
+    itemImage: {
         width: 110,
         height: 73,
         borderRadius: 6,
