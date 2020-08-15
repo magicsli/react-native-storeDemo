@@ -35,7 +35,8 @@ const App: () => React$Node = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView  style={styles.mianView}>
-        <Scorll />
+        {/* <Scorll /> */}
+      <Index />
       </SafeAreaView> 
     </>
   );
