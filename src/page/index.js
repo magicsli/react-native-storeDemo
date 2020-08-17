@@ -21,7 +21,7 @@ export default class Index extends Component {
         super();
         this.state = {
             account: "",
-            password: ''
+            password: '',
         }
     }
 
@@ -29,10 +29,37 @@ export default class Index extends Component {
 
     }
 
+    /**
+     * 公用state更新
+     * @param {String|Number} stateName 需要更新的state名
+     * @param {*} stateValue 需要更新的state值
+     */
     handleChange = (stateName, stateValue) => {
         this.setState({
             [stateName]: stateValue
         })
+    }
+
+    /**
+     * 点击登录, 验证输入是否正确, 进行跳转操作
+     */
+    handleLogin() {
+        const { account, password } = this.state;
+        const { navigation } = this.props;
+
+        if ( !/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/.test(account)){
+            alert("请输入正确的账号...");
+            return false;
+
+        }
+
+        if ( !/^[a-zA-Z]\w{5,17}$/.test(account)){
+            alert("请输入正确的密码");
+            return false;
+        }
+
+        navigation.navigate("Scroll")
+
     }
 
     render() {
@@ -52,7 +79,7 @@ export default class Index extends Component {
                     placeholder="请输入密码"
                     label="密码"
                 />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.handleLogin}>
                     <View style={styles.login}>
                         <Text>登陆</Text>
                     </View>
