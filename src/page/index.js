@@ -9,10 +9,10 @@ import {
     Dimensions
 } from 'react-native'
 import {
-    Input
+    Input,
+    Icon
 } from 'react-native-elements'
-
-
+// import Icon from 'react-native-vector-icons/FontAwesome';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
@@ -35,6 +35,7 @@ export default class Index extends Component {
      * @param {*} stateValue 需要更新的state值
      */
     handleChange = (stateName, stateValue) => {
+        console.log(stateValue);
         this.setState({
             [stateName]: stateValue
         })
@@ -43,45 +44,59 @@ export default class Index extends Component {
     /**
      * 点击登录, 验证输入是否正确, 进行跳转操作
      */
-    handleLogin() {
+    handleLogin = () => {
         const { account, password } = this.state;
         const { navigation } = this.props;
 
-        if ( !/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/.test(account)){
-            alert("请输入正确的账号...");
-            return false;
+        console.log(navigation)
 
+        if (!/[a-zA-Z0-9_]{4,15}$/i.test(account)) {
+            alert("请输入正确的账号");
+            return false;
         }
 
-        if ( !/^[a-zA-Z]\w{5,17}$/.test(account)){
+        if (!/^[a-zA-Z0-9_]{5,17}$/i.test(password)) {
             alert("请输入正确的密码");
             return false;
         }
-
-        navigation.navigate("Scroll")
+        navigation.navigate('Scroll')
+        // navigation.navigate("Scroll");
 
     }
 
     render() {
         return (
             <View style={styles.main}>
+
+                <Text style={styles.label_text}>
+                    欢迎
+                </Text>
+
+
                 <Input
+                    autoFocus={true}
                     value={this.state.account}
                     onChangeText={e => this.handleChange("account", e)}
                     //   onChange={this.handleChange}
                     placeholder="请输入账号"
-                    label="账号"
+                    label="账号:"
+                    leftIcon={
+                        <Icon
+                            name='g-translate'
+                            color='#00aced' />
+                    }
                 />
                 <Input
                     value={this.state.password}
+                    secureTextEntry
                     onChangeText={e => this.handleChange("password", e)}
                     //   onChange={this.handleChange}
                     placeholder="请输入密码"
-                    label="密码"
+                    label="密码:"
                 />
                 <TouchableOpacity onPress={this.handleLogin}>
                     <View style={styles.login}>
-                        <Text>登陆</Text>
+                        <Text style={styles.login_text}>登陆</Text>
                     </View>
 
                 </TouchableOpacity>
@@ -96,7 +111,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 40
+        padding: 40,
+        paddingBottom: 120,
+    },
+    label_text: {
+        fontSize: 16,
+        marginBottom: 50,
     },
     welcome: {
         marginTop: 100
@@ -106,8 +126,12 @@ const styles = StyleSheet.create({
         width: 200,
         height: 40,
         borderRadius: 20,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor: "#f66666"
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#409EFF",
+    },
+    login_text: {
+        color: "#fff"
     }
 })
