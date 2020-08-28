@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-
+import 'react-native-gesture-handler'; //顶部
 import React from 'react';
 
 import {
@@ -14,11 +14,12 @@ import {
   StatusBar,
 } from 'react-native';
 
-import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Index from '@/page/index';
-import Scroll from '@/page/scorll';
+// import Scroll from '@/page/scorll';
+
+// import Index from "./IndexTest";
 
 const Stack = createStackNavigator();
 
@@ -29,7 +30,7 @@ const App: () => React$Node = () => {
         <SafeAreaView style={styles.mianView}>
           <Stack.Navigator initialRouteName="Index">
             <Stack.Screen name="Index" component={Index} />
-            <Stack.Screen name="Scroll" component={Scroll} />
+            {/* <Stack.Screen name="Scroll" component={Scroll} /> */}
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>
