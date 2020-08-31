@@ -69,7 +69,7 @@ export default class Index extends Component {
             <View style={styles.main}>
 
                 <Text style={styles.label_text}>
-                    欢迎
+                    welcome
                 </Text>
 
 
@@ -82,8 +82,10 @@ export default class Index extends Component {
                     label="账号:"
                     leftIcon={
                         <Icon
-                            name='g-translate'
-                            color='#00aced' />
+                            name='account-circle'
+                            type='material'
+                            color='#517fa4'
+                        />
                     }
                 />
                 <Input
@@ -93,12 +95,18 @@ export default class Index extends Component {
                     //   onChange={this.handleChange}
                     placeholder="请输入密码"
                     label="密码:"
+                    leftIcon={
+                        <Icon
+                            name='lock'
+                            type='material'
+                            color='#517fa4'
+                        />
+                    }
                 />
                 <TouchableOpacity onPress={this.handleLogin}>
                     <View style={styles.login}>
                         <Text style={styles.login_text}>登陆</Text>
                     </View>
-
                 </TouchableOpacity>
                 {/* <Text style={styles.welcome}>欢迎登陆本人的storeDemo系统</Text> */}
             </View>

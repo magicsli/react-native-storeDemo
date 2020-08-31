@@ -110,7 +110,11 @@ export default class scorll extends PureComponent {
         } = this.state;
         return (
             <View style={styles.root}>
-                <Image style={styles.top_img} source={{ uri: this.state.top_img, width: screenWidth, height: 160 }} />
+                <Image style={styles.top_img} source={
+                    this.state.top_img
+                        ? { uri: this.state.top_img, width: screenWidth, height: 160 }
+                        : require("@/assets/img/girl.jpg")
+                } />
                 <View style={styles.main}>
 
                     {/* 使用FlatList, 使用起来和Android中的Adapter一样, 可重复渲染, 复用性高, 但是需注意此方法item中不宜保存状态数据,  */}

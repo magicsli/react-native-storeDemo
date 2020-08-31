@@ -17,7 +17,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Index from '@/page/index';
-// import Scroll from '@/page/scorll';
+import Scroll from '@/page/scorll';
 
 // import Index from "./IndexTest";
 
@@ -29,8 +29,8 @@ const App: () => React$Node = () => {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.mianView}>
           <Stack.Navigator initialRouteName="Index">
-            <Stack.Screen name="Index" component={Index} />
-            {/* <Stack.Screen name="Scroll" component={Scroll} /> */}
+            <Stack.Screen name="Index"  component={Index}  options={{ title: "登录页" }} />
+            <Stack.Screen name="Scroll" component={Scroll} options={{title: "测试列表页"}} />
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>
