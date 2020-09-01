@@ -5,6 +5,8 @@ import {
     View,
     StyleSheet,
     Text,
+    Image,
+    CheckBox,
     TouchableOpacity,
     Dimensions
 } from 'react-native'
@@ -16,7 +18,7 @@ import {
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-export default class Index extends Component {
+export default class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -42,6 +44,14 @@ export default class Index extends Component {
     }
 
     /**
+     * 点击前往注册页面
+     */
+    handleGoRegister = () => {
+        const { navigation } = this.props;
+        navigation.navigate("Register");
+    }
+
+    /**
      * 点击登录, 验证输入是否正确, 进行跳转操作
      */
     handleLogin = () => {
@@ -59,7 +69,7 @@ export default class Index extends Component {
             alert("请输入正确的密码");
             return false;
         }
-        navigation.navigate('Scroll')
+        navigation.navigate('Scroll');
         // navigation.navigate("Scroll");
 
     }
@@ -67,17 +77,16 @@ export default class Index extends Component {
     render() {
         return (
             <View style={styles.main}>
-
-                <Text style={styles.label_text}>
-                    welcome
-                </Text>
+                
+                <View>
+                    
+                </View>
+                <Image style={styles.banner} source={require("@/assets/img/boss.png")}></Image>
 
 
                 <Input
-                    autoFocus={true}
                     value={this.state.account}
                     onChangeText={e => this.handleChange("account", e)}
-                    //   onChange={this.handleChange}
                     placeholder="请输入账号"
                     label="账号:"
                     leftIcon={
@@ -92,7 +101,6 @@ export default class Index extends Component {
                     value={this.state.password}
                     secureTextEntry
                     onChangeText={e => this.handleChange("password", e)}
-                    //   onChange={this.handleChange}
                     placeholder="请输入密码"
                     label="密码:"
                     leftIcon={
@@ -108,6 +116,8 @@ export default class Index extends Component {
                         <Text style={styles.login_text}>登陆</Text>
                     </View>
                 </TouchableOpacity>
+
+                <Text onPress={this.handleGoRegister} style={styles.register}>还没有账号?</Text>
                 {/* <Text style={styles.welcome}>欢迎登陆本人的storeDemo系统</Text> */}
             </View>
         )
@@ -117,9 +127,9 @@ export default class Index extends Component {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
-        padding: 40,
+        paddingHorizontal: 40,
         paddingBottom: 120,
     },
     label_text: {
@@ -128,6 +138,11 @@ const styles = StyleSheet.create({
     },
     welcome: {
         marginTop: 100
+    },
+    banner:{
+        width: screenWidth,
+        height: 330 * (screenWidth / 750),
+        marginBottom: 30
     },
     login: {
         // flex: 1,
@@ -141,5 +156,9 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: "#fff"
-    }
+    },
+    register: { // 注册
+        fontSize: 12,
+        paddingVertical: 10
+    },
 })
