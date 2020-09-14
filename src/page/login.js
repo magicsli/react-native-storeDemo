@@ -124,6 +124,18 @@ export default class Login extends Component {
     }
 }
 
+
+const themeContext = React.createContext({
+    theme: "light",
+    setTheme: () => {}
+})
+function ToolBar() {
+    return <themeContext.Provider>
+        <View></View>
+    </themeContext.Provider>
+}
+
+
 const styles = StyleSheet.create({
     main: {
         flex: 1,
