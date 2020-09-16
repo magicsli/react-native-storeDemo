@@ -20,6 +20,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '@/page/login'; // 登录
 import Scroll from '@/page/scorll'; // 滚动列表测试页面
 import Register from '@/page/register'; // 注册页面
+import Chessboard from '@/page/Chessboard'; // 注册页面
 
 // import Index from "./IndexTest";
 
@@ -30,10 +31,11 @@ const App: () => React$Node = () => {
       <NavigationContainer>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.mianView}>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName="Chessboard">
             <Stack.Screen name="Login"  component={Login}  options={{ title: "登录" }} />
             <Stack.Screen name="Register" component={Register} options={{title: "注册"}} />
             <Stack.Screen name="Scroll" component={Scroll} options={{title: "测试列表页"}} />
+            <Stack.Screen name="Chessboard" component={Chessboard} options={{title: "古典象棋(骑砍二)"}} />
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>
